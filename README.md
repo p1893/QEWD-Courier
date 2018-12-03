@@ -8,14 +8,14 @@ Email: <code.custodian@ripple.foundation>
 
 Author: Rob Tweed, M/Gateway Developments Ltd (@rtweed)
 
-# Docker / MicroService-based Ripple QEWD middleware
+# QEWD-Courier
 
-## Summary of the Helm Architecture
+## Summary of the QEWD-Courier Architecture
 
-The Helm middle-tier environment consists of 5 MicroServices, each of which is a Dockerised instance of
+The QEWD-Courier middle-tier environment consists of a series of MicroServices, each of which is a Dockerised instance of
 [QEWD.js](https://qewdjs.com) that is customised to perform a specific task.  
 
-The Helm middle-tier implements the REST APIs that are used by the Helm User Interface (UI) that is known as [PulseTile](https://github.com/PulseTile)
+QEWD-Courier implements the REST APIs that are used by an application's User Interface (UI) and invokes the services responsible for resolving those requests.
 
 The MicroServices are as follows:
 
@@ -72,16 +72,15 @@ This file is read and used by all the QEWD-Courier MicroServices when they start
 
 It is recommended that you don't change the suggested ports unless you need to, in which case you'll need to make corresponding changes to the commands that start each MicroService.
 
-Note 1: The *conductor* and *openid_connect* services are externally-facing and should be accessed via SSL
+Note 1: The *conductor* service is externally-facing and should be accessed via SSL
 
 Note 2: External access will be proxied via nginx (see later)
 
-Note 3: On cloud machines, the *authentication*, *openehr* and *discovery* services often require use of an IP address that is local to the subnet on which it resides: these addresses are the ones that the *conductor* service uses to connect to them.  However, the *conductor* and *openId_connect* host names should be the appropriate externally-facing IP address or domain name by which the PulseTile UI can connect to them.
+Note 3: On cloud machines, the *hello-world*, and your application's services make use of a bridged Docker network to communicate internally.  However, the *courier-conductor-service* host name should be the appropriate externally-facing IP address or domain name by which your UI can connect to it.
 
 
 Example on a local VM:
 
-      "phr": {
         "microservices": {
           "conductor": {
             "host": "https://127.0.0.1",
@@ -90,9 +89,7 @@ Example on a local VM:
           "hello-world": {
             "host": "http://hello-world",
             "port": 8001
-          }
         }
-      }
 
 ### 2. Change the shared JSON Web Token Secret
 
