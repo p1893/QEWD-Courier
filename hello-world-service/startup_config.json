@@ -1,0 +1,6 @@
+{
+  "managementPassword": "pwd_info",
+  "serverName": "Info Server",
+  "port": 8080,
+  "poolSize": 2
+}

@@ -1,0 +1,8 @@
+{
+  "managementPassword": "password",
+  "serverName": "QEWD-Conductor MicroService Server",
+  "port": 8080,
+  "poolSize": 4,
+  "cors": true,
+  "initialSessionTimeout": 600
+}

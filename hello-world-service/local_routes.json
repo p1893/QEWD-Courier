@@ -1,0 +1,12 @@
+[
+  {
+    "path": "hello-world",
+    "module": "/opt/qewd/mapped/modules/hello-world",
+    "errors": {
+      "notfound": {
+        "text": "Resource Not Recognised",
+        "statusCode": 404
+      }
+    }
+  }
+]
