@@ -29,29 +29,35 @@
 */
 
 var transform = require('qewd-transform-json').transform;
-var config = require('./startup_config.json');
-var ms_hosts_template = require('./ms_hosts.json');
-var ms_routes = require('./ms_routes.json');
-var local_routes = require('./local_routes.json');
-var ms_config = require('./ms_config');
-var helpers = require('./utils/helpers');
+var config = require('./settings/startup_config.json');
+var ms_hosts_template = require('./settings/ms_hosts.json');
+var ms_routes = require('./settings/ms_routes.json');
+var local_routes = require('./settings/local_routes.json');
+var ms_config = require('./lib/ms_config');
+var helpers = require('./lib/helpers');
 
-var global_config = require('/opt/qewd/mapped/settings/configuration.json');
-
-var ms_hosts = transform(ms_hosts_template, global_config, helpers);
-console.log('ms_hosts = ' + JSON.stringify(ms_hosts, null, 2));
-
+// Add jwt object to config
+const global_config = require('/opt/qewd/mapped/global_settings/configuration.json');
 config.jwt = global_config.jwt;
 
-config.u_services = ms_config(ms_routes, ms_hosts);
-var routes = local_routes;
 
+// Add services definitions to config
+const ms_hosts = transform(ms_hosts_template, global_config, helpers);
+const u_services = ms_config(ms_routes, ms_hosts);
+config.u_services = u_services;
+console.log('u_services = ' + JSON.stringify(u_services, null, 2));
+
+// Our local routes
+const routes = local_routes;
+
+/* Whats this about?
 config.moduleMap = {
   'ripple-admin': 'ripple-admin',
   'ripple-audit-log': 'ripple-audit-log',
   'speedTest': 'speedTest'
-};
+};*/
 
+/* remove for now
 config.addMiddleware = function(bp, app, _this) {
   //var util = require('util');
 
@@ -76,8 +82,9 @@ config.addMiddleware = function(bp, app, _this) {
     next();
   });
 };
-
+*/
 
 module.exports = {
   config: config,
-  routes: routes};
+  routes: routes
+};

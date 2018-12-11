@@ -28,24 +28,33 @@
 
 */
 
-var router = require('qewd-router');
-var routes = require('./routeGenerator');
+// TODO This code seems to get executed twice when this module is loaded
+
+const router = require('qewd-router');
+
+const routes_template = [{
+  path: '/api/smokeTest',
+  method: 'GET',
+  handler: require('./handlers/smokeTest')
+}]
 
 module.exports = {
   restModule: true,
   init: function() {
-    routes = router.initialise(routes, module.exports);
+    const routes = router.initialise(routes_template, module.exports);
   },
 
   beforeMicroServiceHandler: function(req, finished) {
     console.log('beforeMicroServiceHandler: ' + JSON.stringify(req));
   },
+  
   beforeHandler: function(req, finished) {
 
     if (!req.headers) {
       finished({error: 'Invalid request'});
       return false;
     }
+    /* Where does this belong?
     if (!req.headers['x-requested-with']) {
       finished({error: 'Invalid request'});
       return false;
@@ -53,28 +62,7 @@ module.exports = {
     if (req.headers['x-requested-with'] !== 'XMLHttpRequest') {
       finished({error: 'Invalid request'});
       return false;
-    }
-
-    //
-  },
-
-  /*
-  workerResponseHandlers: {
-    initialise: function(message) {
-
-      var client;
-      for (var url in this.u_services.clients) {
-        client = this.u_services.clients[url];
-        client.send({
-          type: 'test',
-          hello: 'from primary',
-          token: client.token
-        });
-      }
-
-      console.log('*** initialise worker response handler: ' + JSON.stringify(message));
-      return {hello: 'world'};
-    }
+    }*/
   }
-  */
+
 };

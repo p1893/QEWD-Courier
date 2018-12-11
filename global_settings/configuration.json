@@ -1,0 +1,16 @@
+{
+  "services": {
+    "conductor": {
+      "host": "https://127.0.0.1",
+      "port": 443
+    },
+    "hello-world": {
+      "host": "http://hello-world",
+      "port": 8080,
+      "path_prefix": ""
+    }
+  },
+  "jwt": {
+    "secret": "bd645d9e-6281-4a96-949a-b249f6ff3d97"
+  }
+}

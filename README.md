@@ -66,7 +66,7 @@ You'll be prompted for your password when invoking the second command above
 
 These are defined in the file:
 
-      ~/QEWD-Courier/settings/configuration.json
+      ~/QEWD-Courier/global_settings/configuration.json
 
 This file is read and used by all the QEWD-Courier MicroServices when they start up.
 
@@ -97,7 +97,7 @@ It is strongly recommended that you change the shared JSON Web Token (JWT) secre
 
 The JWT Secret is defined in:
 
-      ~/QEWD-Courier/settings/configuration.json
+      ~/QEWD-Courier/global_settings/configuration.json
 
 ie replace the value of the *secret* property in this section:
 

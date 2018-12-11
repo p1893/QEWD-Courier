@@ -1,3 +1,0 @@
-{
-  "helloworld_service": "=> getUri(microservices.helloworld)"
-}

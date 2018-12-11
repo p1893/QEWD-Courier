@@ -1,7 +1,7 @@
 /*
 
  ----------------------------------------------------------------------------
- | ripple-cdr-discovery: Ripple Discovery Interface                         |
+ | qewd-courier: Hello World Sample                                         |
  |                                                                          |
  | Copyright (c) 2017-18 Ripple Foundation Community Interest Company       |
  | All rights reserved.                                                     |
@@ -28,11 +28,17 @@
 
 */
 
-var global_config = require('/opt/qewd/mapped/settings/configuration.json');
-var config = require('./startup_config.json');
-config.jwt = global_config.jwt;
-var local_routes = require('./local_routes.json');
+// Get the config settings
+let config = require('./settings/startup_config.json');
 
+// Get the jwt object from the global config settings and add to the local config
+const global_config = require('/opt/qewd/mapped/global_settings/configuration.json');
+config.jwt = global_config.jwt;
+
+// Get the local routes
+const local_routes = require('./settings/local_routes.json');
+
+// Export the combined config and the local routes
 module.exports = {
   config: config,
   routes: local_routes

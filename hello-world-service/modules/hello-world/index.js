@@ -30,13 +30,12 @@
 
 var router = require('qewd-router');
 
-var helloworld = require('./handlers/helloworld');
-
 var routes = {
-  '/helloworld': {
-    GET:  helloworld
+  '/api/helloworld': {
+    GET: require('./handlers/helloworld')
   }
 };
+
 
 module.exports = {
   init: function() {

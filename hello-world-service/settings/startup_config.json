@@ -1,0 +1,6 @@
+{
+  "managementPassword": "password",
+  "serverName": "Hello World",
+  "port": 8080,
+  "poolSize": 2
+}
